@@ -6,12 +6,12 @@ Vue.component('randonnee-item', {
   },
   props: ['randonnee', 'selected'],
   template: `
-  <li
-    class="list-group-item"
+  <a href="#"
+    class="list-group-item list-group-item-action"
     v-on:click="$emit('select', randonnee)"
     v-bind:class="{ active: selected }">
     {{ randonnee.title }}
-  </li>`
+  </a>`
 })
 
 var app = new Vue({

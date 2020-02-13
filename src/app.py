@@ -1,13 +1,13 @@
 import json
+import os
 import urllib.parse as urlparse
 
 import gpxpy
 import gpxpy.gpx
 import requests
-import srtm
 from flask import Flask, send_file
 
-APIKEY = '59a5def098f71c09844c9439a581bb628e5ef5409545e73924dad14d'
+APIKEY = os.environ['DATA_GOUV_NC_APIKEY']
 
 app = Flask(__name__)
 
@@ -56,9 +56,6 @@ def get_gpx(id):
   for point in randonnee['tracewkt']['coordinates']:
     longitude, latitude = point
     gpx_segment.points.append(gpxpy.gpx.GPXTrackPoint(latitude, longitude))
-
-  elevation_data = srtm.get_data()
-  elevation_data.add_elevations(gpx, smooth=True)
 
   return app.response_class(
     response=json.dumps({
