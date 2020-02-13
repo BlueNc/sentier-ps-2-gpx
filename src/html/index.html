@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Sentiers Province Sud - gpx</title>
+
+  <link rel="shortcut icon" href="static/favicon.ico">
+
+  <!-- development version, includes helpful console warnings -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- production version, optimized for size and speed -->
+  <!--script src="https://cdn.jsdelivr.net/npm/vue"></script-->
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+   crossorigin=""></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.5.0/gpx.min.js"></script>
+
+
+  <style>
+    #mapid {
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="row no-gutters">
+    <div class="list-group col-sm-4" >
+      <randonnee-item v-for="randonnee in randonnees" v-bind:randonnee="randonnee" v-bind:selected="isSelected(randonnee)" v-on:select="select($event)"></randonnee-item>
+    </div>
+    <div class="col-sm-8">
+      <div id="mapid"></div>
+      <div v-if="selected" class="text-center">
+        <h5>{{ selected.title }}</h5>
+        <p>{{ selected.description }}</p>
+        <button class="btn btn-primary" v-on:click="saveFile">Télécharger le ficher GPX</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="static/js/main.js"></script>
+
+</body>
+</html>
